@@ -28,6 +28,9 @@ async function bootstrap() {
   await redisIoAdapter.connectToRedis();
   app.useWebSocketAdapter(redisIoAdapter);
 
+  // Enable graceful shutdown hooks (for Prisma, Redis cleanup)
+  app.enableShutdownHooks();
+
   const port = configService.get<number>('app.port') || 5001;
   await app.listen(port);
   console.log(`🚀 Chat service is running on port ${port}`);
