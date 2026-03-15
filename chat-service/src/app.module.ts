@@ -10,6 +10,9 @@ import {
   jwtConfig,
   validate,
 } from './config/index.js';
+import { PrismaModule } from './prisma/index.js';
+import { CommonModule } from './common/index.js';
+import { PresenceModule } from './presence/index.js';
 
 @Module({
   imports: [
@@ -18,6 +21,9 @@ import {
       validate,
       load: [appConfig, corsConfig, databaseConfig, redisConfig, jwtConfig],
     }),
+    PrismaModule,
+    CommonModule,
+    PresenceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
